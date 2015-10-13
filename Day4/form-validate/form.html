@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script>
+		var allFieldsValid = true;
+		var fixFields;
+		var errorMsgs;
+		var form;
+		var errDiv;
+
+		window.onload = function () {
+			form = document.getElementById( 'the-form' );
+			errDiv = document.getElementById("err-msgs");
+			
+			
+			var allFormControls = form.elements;
+			
+			// Give the submit button a click handler
+			var submit = document.getElementById('submit');
+			submit.addEventListener('click', validateFields);
+
+			function validateFields(e){
+				
+				e.preventDefault();
+
+				fixFields = [];
+				errorMsgs = [];
+
+				while (errDiv.hasChildNodes()) {
+				   errDiv.removeChild(errDiv.firstChild);
+				   
+				}
+
+				for (var i = 0; i < allFormControls.length; i++){
+
+					var field = allFormControls[i];
+					
+					// Check if text fields are empty
+					if (field.type == "text" || field.type == "password"){
+						if(field.value == ""){
+							allFieldsValid = false;
+							fixFields.push(field.name);
+						}
+					}
+
+					
+				}
+
+				// Check if password fields match each other
+				var password1 = document.getElementById("password");
+				var password2 = document.getElementById("password1");
+				if (password1 != password2) {
+						allFieldsValid = false;
+						errorMsgs.push("Passwords don't match!");
+				}
+
+				emailField = form.email;
+				
+				if (!validateEmail(emailField)) {
+					allFieldsValid = false;
+					errorMsgs.push("That is not a valid email");
+				}
+				
+				if (allFieldsValid == false) {
+					
+					for (var field in fixFields){
+						errorMsgs.push("Fix " + fixFields[field] + "!");
+					}
+
+					if (errorMsgs.length > 0) {
+						
+						// Show error messages
+						
+						var errText = "";
+						for (var i = 0; i < errorMsgs.length; i++){
+							errText += errorMsgs[i] + "<br />";
+						}
+						errDiv.innerHTML =  errText;
+					}
+				} else {
+
+					//console.log (emailField);
+				}
+			}
+		}
+
+		function validateEmail(field)
+      {
+         var emailID = field.value;
+         atpos = emailID.indexOf("@");
+         dotpos = emailID.lastIndexOf(".");
+         
+         if (atpos < 1 || ( dotpos - atpos < 2 )) 
+         {
+            //alert("Please enter correct email")
+            field.focus() ;
+            return false;
+         }
+         return( true );
+      }
+	</script>
+</head>
+<body>
+	
+	<form action="#" id="the-form" method="post" class="form-container">
+		<div class="form-title"><h2>Register</h2></div>
+		<div id="err-msgs"></div>
+		<div class="form-title">Name</div>
+		<input class="form-field" type="text" name="firstname" />
+		<div class="form-title">Email</div>
+		<input class="form-field" type="text" name="email" />
+		<div class="form-title">Password</div>
+		<input class="form-field" type="password" name="password" />
+		<div class="form-title">Re-enter Password</div>
+		<input class="form-field" type="password" name="password2" />
+		<div class="submit-container">
+			<input class="submit-button" id="submit" type="submit" value="Submit" />
+		</div>
+	</form>
+</body>
+</html>

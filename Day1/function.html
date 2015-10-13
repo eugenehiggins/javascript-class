@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script>
+	function calcTemp(c) {
+		var cTemp = c; 	//temperature in Celsius
+		var fTemp = ((cTemp * 9) / 5) + 32;		// celsius time 9, divided by 5, plus 32
+
+		document.getElementById("celsius").innerHTML = "Temp in Celsius: " + cTemp + " degrees.";
+		document.getElementById("fahrenheit").innerHTML = "Temp in Fahrenheit: " + fTemp + " degrees.";
+	}
+	</script>
+</head>
+<body>
+	<div id="celsius"></div>
+	<div id="fahrenheit"></div>
+	<script>
+		calcTemp(34);
+		calcTemp(55);
+		calcTemp(38);
+	</script>
+
+</body>
+</html>

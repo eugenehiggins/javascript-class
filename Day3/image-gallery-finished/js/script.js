@@ -1,10 +1,13 @@
-//alert("hello");
+// window.onload even
+// Preloading images
+// Check that images are loaded
+
 
 var thumbnails = new Array();
 var numberOfFiles = 9;
 var thumbnailsDiv;
 var allImagesLoaded = false;
-var largeImage 
+var largeImage;
 	
 window.onload = function () {
 	
@@ -59,6 +62,7 @@ function checkIfAllImagesLoaded(){
 	// the numberOfFiles variable. If it is, set the first one as 
 	// active, set the large image to show the first thumbnail
 	if (loadedCount == numberOfFiles) {
+		
 		thumbnails[0].className += " active";
 		showLargeImage(thumbnails[0]);
 		allImagesLoaded = true;

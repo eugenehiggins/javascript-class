@@ -8,7 +8,7 @@
 <body>
 	<div class="container">
 		<h2>Please Log In</h2>
-		<form class="form-inline" role="form">
+		<form class="form-inline" action="some_other_page.php"role="form">
 			<div class="form-group">
 				<label for="email">Email:</label>
 				<input type="email" class="form-control" id="email" placeholder="Enter email">
@@ -20,7 +20,7 @@
 			<div class="checkbox">
 				<label><input type="checkbox"> Remember me</label>
 			</div>
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button id="submit" type="submit" class="btn btn-default">Submit</button>
 		</form>
 	</div>
 	<script src="js/jquery-2.1.4.js"></script>
@@ -29,8 +29,59 @@
 	<script type="text/javascript">
 	// Helpful link for dealing with forms via javascript: https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
 
-	console.log
+	var form = document.forms[0];
+	var submit = document.getElementById("submit");
 
-	</script>
+	submit.addEventListener("click", function(evt){
+		// without preventing the default action it will want to continue on to 
+		
+	});
+	
+
+	var testresults
+	function checkemail(){
+		var str=document.validation.emailcheck.value
+		var filter=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+		if (filter.test(str))
+			testresults=true
+		else{
+			alert("Please input a valid email address!")
+			testresults=false
+		}
+
+	}
+
+	// Show all of the elements of the form
+	console.log(form.elements)
+	console.log('****************');
+
+	// Display number of elements
+	console.log("Form length: " + form.length)
+	console.log('****************');
+
+	// This loop will show you a lot more parts of the form,
+	// problably more then you need.	
+	for (el in form){
+		console.log(el)
+	}
+	console.log('****************');
+
+	// This loop will only get the form fields we want
+	for (el in form) {
+
+		// Just get the form fields, and not all the other stuff
+		if (form.hasOwnProperty(el)){
+			//console.log(form[el].type);
+
+			// Check the email field
+			if (form[el].type === 'email' && form[el].value != '') {
+				console.log('this is email')
+			} else {
+				console.log('nothing entered')
+			}
+		}
+	}
+
+</script>
 </body>
 </html>

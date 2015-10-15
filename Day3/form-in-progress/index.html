@@ -32,11 +32,13 @@
 	var form = document.forms[0];
 	var submit = document.getElementById("submit");
 
-	submit.addEventListener("click", function(evt){
+	submit.addEventListener("click", function(event){
 		// without preventing the default action it will want to continue on to 
-		
+		event.preventDefault();
+
+		console.log("submit clicked");
+		// grab all the form fields' values and send them on to the server
 	});
-	
 
 	var testresults
 	function checkemail(){
@@ -50,7 +52,7 @@
 		}
 
 	}
-
+/*
 	// Show all of the elements of the form
 	console.log(form.elements)
 	console.log('****************');
@@ -81,7 +83,7 @@
 			}
 		}
 	}
-
+*/
 </script>
 </body>
 </html>
